@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Flask Todo API",
+      "description": "API for managing a to-do list",
+      "version": "1.0.0"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "todos",
+        "description": "Operations related to to-do items"
+      }
+    ],
+    "paths": {
+      "/todos": {
+        "get": {
+          "tags": ["todos"],
+          "summary": "Get all to-do items",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "task": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["todos"],
+          "summary": "Add a new to-do item",
+          "parameters": [
+            {
+              "name": "todo",
+              "in": "body",
+              "description": "The to-do item to add",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "todo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Todo successfully created",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "todo": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "task": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/todos/{todo_id}": {
+        "put": {
+          "tags": ["todos"],
+          "summary": "Update an existing to-do item",
+          "parameters": [
+            {
+              "name": "todo_id",
+              "in": "path",
+              "description": "ID of the to-do item to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "task",
+              "in": "body",
+              "description": "The new task description",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Todo successfully updated",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "todo": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "task": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Todo not found"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["todos"],
+          "summary": "Delete a to-do item",
+          "parameters": [
+            {
+              "name": "todo_id",
+              "in": "path",
+              "description": "ID of the to-do item to delete",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Todo successfully deleted",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Todo not found"
+            }
+          }
+        }
+      }
+    }
+  }
+  
