@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - master  # Trigger deployment on changes to the master branch
 
 jobs:
   deploy:
@@ -24,10 +24,12 @@ jobs:
 
       - name: Build static site
         run: |
-          # Add any build commands here if needed
+          # Add any build commands here if you have them, e.g.:
+          # python build.py
+          # For a static site, you might not need this step
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Adjust if needed, e.g., './build' or './public'
+          publish_dir: ./ # Directory to publish (adjust if needed)
