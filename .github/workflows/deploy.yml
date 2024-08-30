@@ -3,19 +3,18 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - master  # Trigger deployment on changes to the master branch
 
-      
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
 
@@ -25,9 +24,9 @@ jobs:
 
       - name: Build static site
         run: |
-          # Add any build commands here if you have them, e.g.:
+          # If your site is static, you may not need this step.
+          # For example:
           # python build.py
-          # For a static site, you might not need this step
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
