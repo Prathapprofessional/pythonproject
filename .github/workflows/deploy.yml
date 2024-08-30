@@ -26,13 +26,8 @@ jobs:
         run: |
           # Add any build commands here if needed
 
-      - name: Verify Git configuration
-        run: |
-          git --version
-          git config --list
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Adjust if needed
+          publish_dir: ./  # Adjust if needed, e.g., './build' or './public'
