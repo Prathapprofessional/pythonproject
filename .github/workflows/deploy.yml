@@ -24,12 +24,11 @@ jobs:
 
       - name: Build static site
         run: |
-          # Add any build commands here if you have them, e.g.:
-          # python build.py
-          # For a static site, you might not need this step
+          # If you have a build script or command, add it here
+          # For static sites, you might not need this step
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ # Directory to publish (adjust if needed)
+          publish_dir: ./ # Adjust if needed
