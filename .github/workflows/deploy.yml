@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # Trigger deployment on changes to the master branch
+      - master
 
 jobs:
   deploy:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
@@ -24,11 +24,15 @@ jobs:
 
       - name: Build static site
         run: |
-          # If you have a build script or command, add it here
-          # For static sites, you might not need this step
+          # Add any build commands here if needed
+
+      - name: Verify Git configuration
+        run: |
+          git --version
+          git config --list
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ # Adjust if needed
+          publish_dir: ./  # Adjust if needed
