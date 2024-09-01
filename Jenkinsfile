@@ -15,34 +15,26 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    bat 'docker build -t %DOCKER_IMAGE% .'
-                }
+                bat 'docker build -t %DOCKER_IMAGE% .'
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    bat 'pytest'
-                }
+                bat 'pytest'
             }
         }
 
         stage('Push') {
             steps {
-                script {
-                    bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin %REGISTRY%'
-                    bat 'docker push %DOCKER_IMAGE%'
-                }
+                bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin %REGISTRY%'
+                bat 'docker push %DOCKER_IMAGE%'
             }
         }
 
         stage('Deploy') {
             steps {
-                script {
-                    bat 'kubectl set image deployment/todo-api-deployment todo-api=%DOCKER_IMAGE%'
-                }
+                bat 'kubectl set image deployment/todo-api-deployment todo-api=%DOCKER_IMAGE%'
             }
         }
     }
